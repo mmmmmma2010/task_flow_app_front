@@ -1,0 +1,187 @@
+.page {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.backBtn:hover {
+    color: #818cf8;
+}
+
+.topActions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.actionBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1rem;
+    border-radius: 9px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.completeBtn {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+.completeBtn:hover {
+    background: rgba(16, 185, 129, 0.2);
+}
+
+.editBtn {
+    background: rgba(99, 102, 241, 0.1);
+    color: #818cf8;
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+.editBtn:hover {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.deleteBtn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+.deleteBtn:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+    flex: 1;
+}
+
+.badges {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.overdueTag {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.description {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metaItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.metaIcon {
+    color: #4b5563;
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
+}
+
+.metaLabel {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.metaValue {
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.overdue {
+    color: #f87171;
+    font-weight: 600;
+}
+
+.daysHint {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-left: 0.25rem;
+}

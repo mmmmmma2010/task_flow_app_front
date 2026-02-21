@@ -1,0 +1,140 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+}
+
+.brandIcon {
+    color: #6366f1;
+    font-size: 1.4rem;
+}
+
+.links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.link {
+    display: block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #64748b;
+    transition: all 0.2s;
+}
+
+.link:hover {
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.link.active {
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: auto;
+}
+
+.navbarCreateBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-right: 0.5rem;
+}
+
+.navbarCreateBtn:hover {
+    background: rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.85rem;
+}
+
+.username {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.logoutBtn:hover {
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.08);
+}
+
+@media (max-width: 640px) {
+    .username {
+        display: none;
+    }
+
+    .links .link {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+}
