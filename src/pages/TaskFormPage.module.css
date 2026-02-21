@@ -1,16 +1,5 @@
 .page {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-    }
+    /* Animation removed to fix dropdown positioning bug at (0,0) */
 }
 
 .topBar {
@@ -88,7 +77,7 @@
 .textarea,
 .select {
     padding: 0.75rem 0.9rem;
-    background: rgba(255, 255, 255, 0.04);
+    background: #1e2540;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     color: #f1f5f9;
