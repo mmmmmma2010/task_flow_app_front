@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { getTask, createTask, updateTask } from '../api/tasks';
+import { getUsers } from '../api/auth';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import { extractErrorMessage, STATUS_OPTIONS, PRIORITY_OPTIONS } from '../utils/formatters';
 import toast from 'react-hot-toast';
@@ -27,6 +28,13 @@ const TaskFormPage = () => {
     const navigate = useNavigate();
     const isEditing = Boolean(id);
     const [initialLoading, setInitialLoading] = useState(isEditing);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        getUsers()
+            .then(setUsers)
+            .catch(() => console.error('Failed to load users'));
+    }, []);
 
     const {
         register,
@@ -151,13 +159,18 @@ const TaskFormPage = () => {
                             />
                         </div>
                         <div className={styles.field}>
-                            <label className={styles.label}>Assign To (User ID)</label>
-                            <input
-                                type="number"
-                                placeholder="User ID (optional)"
-                                className={`${styles.input} ${errors.assigned_to_id ? styles.inputError : ''}`}
+                            <label className={styles.label}>Assign To</label>
+                            <select
+                                className={`${styles.select} ${errors.assigned_to_id ? styles.inputError : ''}`}
                                 {...register('assigned_to_id')}
-                            />
+                            >
+                                <option value="">Unassigned</option>
+                                {users.map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {user.username}
+                                    </option>
+                                ))}
+                            </select>
                             {errors.assigned_to_id && <p className={styles.error}>{errors.assigned_to_id.message}</p>}
                         </div>
                     </div>

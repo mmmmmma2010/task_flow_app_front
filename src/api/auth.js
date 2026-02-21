@@ -9,3 +9,8 @@ export const refreshToken = async (refresh) => {
     const response = await apiClient.post('/api/token/refresh/', { refresh });
     return response.data; // { access }
 };
+
+export const getUsers = async () => {
+    const response = await apiClient.get('/api/users/');
+    return response.data;
+};
