@@ -7,6 +7,7 @@ import { getTask, createTask, updateTask } from '../api/tasks';
 import { getUsers } from '../api/auth';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import CustomSelect from '../components/common/CustomSelect';
+import CustomDatePicker from '../components/common/CustomDatePicker';
 import { extractErrorMessage, STATUS_OPTIONS, PRIORITY_OPTIONS } from '../utils/formatters';
 import toast from 'react-hot-toast';
 import { FiArrowLeft, FiSave } from 'react-icons/fi';
@@ -162,14 +163,18 @@ const TaskFormPage = () => {
 
                     {/* Row: Due date + Assigned to */}
                     <div className={styles.row}>
-                        <div className={styles.field}>
-                            <label className={styles.label}>Due Date</label>
-                            <input
-                                type="datetime-local"
-                                className={styles.input}
-                                {...register('due_date')}
-                            />
-                        </div>
+                        <Controller
+                            name="due_date"
+                            control={control}
+                            render={({ field }) => (
+                                <CustomDatePicker
+                                    label="Due Date"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    error={errors.due_date?.message}
+                                />
+                            )}
+                        />
                         <Controller
                             name="assigned_to_id"
                             control={control}
