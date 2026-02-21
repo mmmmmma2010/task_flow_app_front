@@ -21,6 +21,7 @@ import styles from './CustomDatePicker.module.css';
 
 const CustomDatePicker = ({ value, onChange, label, error, placeholder = 'Select date & time' }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [timeDropdownOpen, setTimeDropdownOpen] = useState(null); // 'hours' or 'minutes' or null
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const containerRef = useRef(null);
 
@@ -99,7 +100,7 @@ const CustomDatePicker = ({ value, onChange, label, error, placeholder = 'Select
                     <div
                         key={day.toString()}
                         className={`${styles.cell} ${!isSameMonth(day, monthStart) ? styles.disabled :
-                                isSameDay(day, selectedDate) ? styles.selected : ''
+                            isSameDay(day, selectedDate) ? styles.selected : ''
                             }`}
                         onClick={() => handleDateClick(cloneDay)}
                     >
@@ -116,29 +117,67 @@ const CustomDatePicker = ({ value, onChange, label, error, placeholder = 'Select
 
     const renderTimePicker = () => {
         if (!selectedDate) return null;
+
+        const hours = getHours(selectedDate);
+        const minutes = getMinutes(selectedDate);
+
         return (
             <div className={styles.timePicker}>
                 <FiClock className={styles.timeIcon} />
                 <div className={styles.timeInputs}>
-                    <select
-                        value={getHours(selectedDate)}
-                        onChange={(e) => handleTimeChange('hours', e.target.value)}
-                        className={styles.timeSelect}
-                    >
-                        {Array.from({ length: 24 }).map((_, i) => (
-                            <option key={i} value={i}>{i.toString().padStart(2, '0')}</option>
-                        ))}
-                    </select>
+                    {/* Hours Dropdown */}
+                    <div className={styles.customTimeSelect}>
+                        <div
+                            className={styles.timeTrigger}
+                            onClick={() => setTimeDropdownOpen(timeDropdownOpen === 'hours' ? null : 'hours')}
+                        >
+                            {hours.toString().padStart(2, '0')}
+                        </div>
+                        {timeDropdownOpen === 'hours' && (
+                            <ul className={styles.timeOptions}>
+                                {Array.from({ length: 24 }).map((_, i) => (
+                                    <li
+                                        key={i}
+                                        className={`${styles.timeOption} ${hours === i ? styles.timeOptionSelected : ''}`}
+                                        onClick={() => {
+                                            handleTimeChange('hours', i);
+                                            setTimeDropdownOpen(null);
+                                        }}
+                                    >
+                                        {i.toString().padStart(2, '0')}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+
                     <span className={styles.timeSeparator}>:</span>
-                    <select
-                        value={getMinutes(selectedDate)}
-                        onChange={(e) => handleTimeChange('minutes', e.target.value)}
-                        className={styles.timeSelect}
-                    >
-                        {Array.from({ length: 60 }).map((_, i) => (
-                            <option key={i} value={i}>{i.toString().padStart(2, '0')}</option>
-                        ))}
-                    </select>
+
+                    {/* Minutes Dropdown */}
+                    <div className={styles.customTimeSelect}>
+                        <div
+                            className={styles.timeTrigger}
+                            onClick={() => setTimeDropdownOpen(timeDropdownOpen === 'minutes' ? null : 'minutes')}
+                        >
+                            {minutes.toString().padStart(2, '0')}
+                        </div>
+                        {timeDropdownOpen === 'minutes' && (
+                            <ul className={styles.timeOptions}>
+                                {Array.from({ length: 60 }).map((_, i) => (
+                                    <li
+                                        key={i}
+                                        className={`${styles.timeOption} ${minutes === i ? styles.timeOptionSelected : ''}`}
+                                        onClick={() => {
+                                            handleTimeChange('minutes', i);
+                                            setTimeDropdownOpen(null);
+                                        }}
+                                    >
+                                        {i.toString().padStart(2, '0')}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
             </div>
         );
