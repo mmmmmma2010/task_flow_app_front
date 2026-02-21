@@ -1,0 +1,140 @@
+.container {
+    position: relative;
+    width: 100%;
+    font-family: inherit;
+}
+
+.label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+}
+
+.trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.9rem;
+    background: #1e2540;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    min-height: 42px;
+}
+
+.trigger:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.triggerOpen {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.triggerError {
+    border-color: rgba(239, 68, 68, 0.5) !important;
+}
+
+.value {
+    color: #f1f5f9;
+}
+
+.placeholder {
+    color: #4b5563;
+}
+
+.icon {
+    color: #64748b;
+    transition: transform 0.2s ease;
+}
+
+.iconOpen {
+    transform: rotate(180deg);
+    color: #818cf8;
+}
+
+.optionsList {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.4rem;
+    margin: 0;
+    list-style: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    animation: slideDown 0.2s ease;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.option {
+    padding: 0.65rem 0.8rem;
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.option:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: #f1f5f9;
+}
+
+.optionSelected {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    font-weight: 600;
+}
+
+.noOptions {
+    padding: 0.8rem;
+    color: #64748b;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.errorText {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    color: #ef4444;
+}
+
+/* Scrollbar */
+.optionsList::-webkit-scrollbar {
+    width: 4px;
+}
+
+.optionsList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.optionsList::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}

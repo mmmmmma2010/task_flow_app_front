@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getTasks, deleteTask, completeTask } from '../api/tasks';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import CustomSelect from '../components/common/CustomSelect';
 import StatusBadge from '../components/common/StatusBadge';
 import PriorityBadge from '../components/common/PriorityBadge';
 import ConfirmModal from '../components/common/ConfirmModal';
@@ -10,6 +11,14 @@ import { formatDate, STATUS_OPTIONS, PRIORITY_OPTIONS, extractErrorMessage } fro
 import toast from 'react-hot-toast';
 import { FiPlus, FiEdit2, FiTrash2, FiCheckCircle, FiSearch, FiFilter, FiEye } from 'react-icons/fi';
 import styles from './TaskListPage.module.css';
+
+const ORDERING_OPTIONS = [
+    { value: '-created_at', label: 'Newest First' },
+    { value: 'created_at', label: 'Oldest First' },
+    { value: '-due_date', label: 'Due Date (Latest)' },
+    { value: 'due_date', label: 'Due Date (Earliest)' },
+    { value: 'priority', label: 'Priority' },
+];
 
 const TaskListPage = () => {
     const navigate = useNavigate();
@@ -100,31 +109,25 @@ const TaskListPage = () => {
                 </div>
                 <div className={styles.filterRight}>
                     <FiFilter className={styles.filterIcon} />
-                    <select
-                        className={styles.select}
-                        value={filters.status}
-                        onChange={(e) => handleFilterChange('status', e.target.value)}
-                    >
-                        {STATUS_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                    </select>
-                    <select
-                        className={styles.select}
-                        value={filters.priority}
-                        onChange={(e) => handleFilterChange('priority', e.target.value)}
-                    >
-                        {PRIORITY_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                    </select>
-                    <select
-                        className={styles.select}
-                        value={filters.ordering}
-                        onChange={(e) => handleFilterChange('ordering', e.target.value)}
-                    >
-                        <option value="-created_at">Newest First</option>
-                        <option value="created_at">Oldest First</option>
-                        <option value="-due_date">Due Date (Latest)</option>
-                        <option value="due_date">Due Date (Earliest)</option>
-                        <option value="priority">Priority</option>
-                    </select>
+                    <div className={styles.selectGroup}>
+                        <CustomSelect
+                            value={filters.status}
+                            onChange={(val) => handleFilterChange('status', val)}
+                            options={STATUS_OPTIONS}
+                            placeholder="All Statuses"
+                        />
+                        <CustomSelect
+                            value={filters.priority}
+                            onChange={(val) => handleFilterChange('priority', val)}
+                            options={PRIORITY_OPTIONS}
+                            placeholder="All Priorities"
+                        />
+                        <CustomSelect
+                            value={filters.ordering}
+                            onChange={(val) => handleFilterChange('ordering', val)}
+                            options={ORDERING_OPTIONS}
+                        />
+                    </div>
                 </div>
             </div>
 

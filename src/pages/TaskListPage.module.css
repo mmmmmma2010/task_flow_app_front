@@ -99,35 +99,29 @@
     flex-wrap: wrap;
 }
 
+.filterRight {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 2;
+    min-width: 300px;
+}
+
 .filterIcon {
     color: #64748b;
     font-size: 0.95rem;
+    flex-shrink: 0;
 }
 
-.select {
-    padding: 0.65rem 2.2rem 0.65rem 0.9rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    color: #94a3b8;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 0.9rem;
+.selectGroup {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
 }
 
-.select:focus {
-    outline: none;
-    border-color: #6366f1;
-    background: rgba(99, 102, 241, 0.05);
-}
-
-.select option {
-    background: #111827;
+.selectGroup>div {
+    flex: 1;
+    min-width: 140px;
 }
 
 /* Table */

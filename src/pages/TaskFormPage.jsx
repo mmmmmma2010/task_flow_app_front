@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { getTask, createTask, updateTask } from '../api/tasks';
 import { getUsers } from '../api/auth';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import CustomSelect from '../components/common/CustomSelect';
 import { extractErrorMessage, STATUS_OPTIONS, PRIORITY_OPTIONS } from '../utils/formatters';
 import toast from 'react-hot-toast';
 import { FiArrowLeft, FiSave } from 'react-icons/fi';
@@ -40,6 +41,7 @@ const TaskFormPage = () => {
         register,
         handleSubmit,
         reset,
+        control,
         formState: { errors, isSubmitting },
     } = useForm({
         resolver: zodResolver(schema),
@@ -130,22 +132,32 @@ const TaskFormPage = () => {
 
                     {/* Row: Priority + Status */}
                     <div className={styles.row}>
-                        <div className={styles.field}>
-                            <label className={styles.label}>Priority</label>
-                            <select className={styles.select} {...register('priority')}>
-                                {PRIORITY_OPTIONS.filter((o) => o.value).map((o) => (
-                                    <option key={o.value} value={o.value}>{o.label}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className={styles.field}>
-                            <label className={styles.label}>Status</label>
-                            <select className={styles.select} {...register('status')}>
-                                {STATUS_OPTIONS.filter((o) => o.value).map((o) => (
-                                    <option key={o.value} value={o.value}>{o.label}</option>
-                                ))}
-                            </select>
-                        </div>
+                        <Controller
+                            name="priority"
+                            control={control}
+                            render={({ field }) => (
+                                <CustomSelect
+                                    label="Priority"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    options={PRIORITY_OPTIONS.filter(o => o.value)}
+                                    error={errors.priority?.message}
+                                />
+                            )}
+                        />
+                        <Controller
+                            name="status"
+                            control={control}
+                            render={({ field }) => (
+                                <CustomSelect
+                                    label="Status"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    options={STATUS_OPTIONS.filter(o => o.value)}
+                                    error={errors.status?.message}
+                                />
+                            )}
+                        />
                     </div>
 
                     {/* Row: Due date + Assigned to */}
@@ -158,21 +170,20 @@ const TaskFormPage = () => {
                                 {...register('due_date')}
                             />
                         </div>
-                        <div className={styles.field}>
-                            <label className={styles.label}>Assign To</label>
-                            <select
-                                className={`${styles.select} ${errors.assigned_to_id ? styles.inputError : ''}`}
-                                {...register('assigned_to_id')}
-                            >
-                                <option value="">Unassigned</option>
-                                {users.map((user) => (
-                                    <option key={user.id} value={user.id}>
-                                        {user.username}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.assigned_to_id && <p className={styles.error}>{errors.assigned_to_id.message}</p>}
-                        </div>
+                        <Controller
+                            name="assigned_to_id"
+                            control={control}
+                            render={({ field }) => (
+                                <CustomSelect
+                                    label="Assign To"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    placeholder="Unassigned"
+                                    options={users.map(u => ({ value: u.id, label: u.username }))}
+                                    error={errors.assigned_to_id?.message}
+                                />
+                            )}
+                        />
                     </div>
 
                     <div className={styles.formActions}>
